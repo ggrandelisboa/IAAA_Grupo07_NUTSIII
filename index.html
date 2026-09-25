@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IAAA_Grupo07_NUTSIII</title>
+<style>
+:root{--bg:#ffffff;--card:#ffffff;--ink:#111111;--mut:#6f6f6f;--acc:#111111;--line:#e6e6e6;--bege:#fafafa}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased}
+body{padding-top:64px}
+/* Cabeçalho minimalista (exemplo): marca à esquerda, navegação à direita */
+header.site-head{position:fixed;top:0;left:0;right:0;z-index:50;background:#fff;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 28px;height:64px}
+.brand{text-decoration:none;color:var(--ink);font-size:15px;font-weight:700;letter-spacing:3px}
+nav.site-nav{display:flex;align-items:center;gap:26px;font-size:12px;letter-spacing:2px;text-transform:uppercase}
+nav.site-nav a{color:var(--ink);text-decoration:none}
+nav.site-nav a:hover{text-decoration:underline;text-underline-offset:4px}
+nav.site-nav details{position:relative}
+nav.site-nav summary{cursor:pointer;list-style:none;text-transform:uppercase;letter-spacing:2px;font-size:12px}
+nav.site-nav summary::-webkit-details-marker{display:none}
+nav.site-nav summary:after{content:" +";color:var(--mut)}
+nav.site-nav details[open] summary:after{content:" –"}
+nav.site-nav details div{position:absolute;right:0;top:28px;background:#fff;border:1px solid var(--line);min-width:210px;padding:6px 0}
+nav.site-nav details div a{display:block;padding:9px 18px;font-size:12px}
+nav.site-nav details div a:hover{background:var(--bege)}
+/* Hero full-bleed (exemplo): imagem larga, título pequeno sobre branco */
+.hero{max-width:1400px;margin:0 auto;padding:34px 28px 8px 28px}
+.hero figure{margin:0}
+.hero img{width:100%;max-height:62vh;object-fit:cover;border:none;border-radius:0}
+.hero-clean{clip-path:inset(22% 0 22% 1.5%)}
+.hero-cap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;padding:18px 2px 6px 2px}
+.hero-cap h1{margin:0;font-size:clamp(20px,2.6vw,30px);font-weight:500;letter-spacing:.5px}
+.hero-cap p{margin:4px 0 0 0;color:var(--mut);font-size:13px;letter-spacing:.5px}
+main{max-width:1000px;margin:0 auto;padding:10px 28px 30px 28px}
+section.prancha{background:var(--card);border:none;border-radius:0;padding:0 0 72px 0;margin:0;box-shadow:none}
+/* Abertura de prancha: faixa escura numerada — marca clara de início; o fim lê-se no respiro + faixa seguinte */
+.p-open{background:#111;color:#fff;border-radius:0;padding:24px 26px;margin:64px 0 10px 0;display:flex;gap:20px;align-items:center}
+.p-open .n{font-size:42px;font-weight:800;line-height:1;letter-spacing:1px;flex:0 0 auto}
+.p-open .tt b{display:block;font-size:17px;letter-spacing:2.5px;text-transform:uppercase;font-weight:700}
+.p-open .tt span{display:block;color:#cfc9bd;font-size:12.5px;letter-spacing:.4px;margin-top:5px}
+section.prancha:first-of-type .p-open{margin-top:24px}
+.p-open.light{background:#fff;color:var(--ink);border:1.5px solid var(--ink)}
+.p-open.light .tt span{color:var(--mut)}
+section.prancha h2{margin:0 0 6px 0;font-size:13px;font-weight:700;letter-spacing:3px;text-transform:uppercase;border:none;padding:0}
+section.prancha h3{font-size:19px;font-weight:500;margin:30px 0 8px 0}
+.badge{display:block;background:none;color:var(--mut);font-size:11px;letter-spacing:2.5px;text-transform:uppercase;padding:0;margin-bottom:10px}
+table{width:100%;border-collapse:collapse;font-size:13.5px;margin:12px 0}
+th,td{border:none;border-top:1px solid var(--line);padding:10px 8px;vertical-align:top;text-align:left}
+th{font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--mut);font-weight:700}
+tr:last-child td{border-bottom:1px solid var(--line)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:28px}@media(max-width:800px){.grid2{grid-template-columns:1fr}}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}@media(max-width:800px){.grid3{grid-template-columns:1fr}}
+img{max-width:100%;border:none;border-radius:0}
+figure{margin:26px 0}figcaption{font-size:12px;color:var(--mut);padding-top:8px}
+.kv{background:var(--bege);border:1px solid var(--line);border-radius:0;padding:14px 16px;margin:14px 0;font-size:14px}
+.conceito{font-size:20px;font-weight:500;border:none;border-top:2px solid var(--ink);padding-top:14px;margin:22px 0}
+.regra{background:#fff;color:var(--ink);border:1px solid var(--ink);border-radius:0;padding:16px 18px;margin:14px 0}
+.regra b{color:var(--ink)}
+@media(max-width:700px){nav.site-nav{gap:14px}nav.site-nav details div{position:fixed;left:0;right:0;top:64px;min-width:0}}
+/* 1 — fichas OHL Prancha 3 (minimal) */
+.ficha{border:none;border-top:1px solid var(--line);border-radius:0;padding:20px 0 8px 0;margin:18px 0;background:#fff}
+.ficha h4{margin:0 0 6px 0;font-size:16px;font-weight:600;letter-spacing:.5px}
+.ficha dl{display:grid;grid-template-columns:150px 1fr;gap:4px 12px;font-size:13.5px;margin:10px 0}
+.ficha dt{font-weight:700;color:var(--mut);font-size:11px;letter-spacing:1.5px;text-transform:uppercase}
+.ficha dd{margin:0}
+/* 2 — tabela P1 com thead fixo + scroll horizontal */
+.table-scroll{overflow-x:auto;border:1px solid var(--line);border-radius:10px}
+.table-scroll table{margin:0;min-width:820px}
+.table-scroll thead th{position:sticky;top:58px;z-index:5;box-shadow:0 1px 0 var(--line)}
+.table-scroll td:nth-child(4),.table-scroll th:nth-child(4){white-space:nowrap}
+/* 3 — SWOT 2x2 */
+.swot-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:12px 0}
+@media(max-width:800px){.swot-grid{grid-template-columns:1fr}}
+.swot{border:none;border-top:2px solid var(--ink);border-radius:0;padding:14px 0;background:#fff}
+.swot h4{margin:0 0 8px 0;font-size:12px;letter-spacing:2.5px;color:var(--ink)}
+.swot.s h4,.swot.o h4{border-left:none;padding-left:0}
+.swot.w h4,.swot.t h4{border-left:none;padding-left:0}
+.vol-grid{display:grid;grid-template-columns:1fr 1fr;gap:28px}
+@media(max-width:800px){.vol-grid{grid-template-columns:1fr}}
+.vol{border:none;border-top:1px solid var(--line);border-radius:0;padding:14px 0;background:#fff}
+.norte{display:inline-block;border:1px solid var(--ink);background:#fff;color:var(--ink);font-size:11px;letter-spacing:1px;padding:1px 8px;border-radius:0;margin-left:6px}
+small, .src{color:var(--mut);font-size:12.5px}
+footer.site-foot{max-width:1000px;margin:0 auto;padding:24px 28px 48px 28px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;border-top:1px solid var(--ink);color:var(--mut);font-size:11px;letter-spacing:1.5px;text-transform:uppercase}
+@media print{header.site-head{display:none}body{padding-top:0}section.prancha{break-inside:avoid;box-shadow:none}.p-open{-webkit-print-color-adjust:exact;print-color-adjust:exact}a[href^="http"]:after{content:" (" attr(href) ")";font-size:11px;color:#333;word-break:break-all}.table-scroll{overflow:visible}.table-scroll thead th{position:static}footer.print-src{display:block !important}}
+</style>
+</head>
+<body id="top">
+<header class="site-head">
+<a class="brand" href="#top">IAAA_Grupo07_NUTSIII</a>
+<nav class="site-nav" aria-label="Navegação principal">
+<details>
+<summary>Pranchas</summary>
+<div>
+<a href="#p1">Território e lugar</a>
+<a href="#p2">Clima</a>
+<a href="#p3">Cultura</a>
+<a href="#p4">Síntese SWOT</a>
+</div>
+</details>
+<details>
+<summary>Sobre</summary>
+<div>
+<a href="#declaracao">Declaração</a>
+<a href="#figuras">Índice de figuras</a>
+<a href="#p4">Programa</a>
+</div>
+</details>
+</nav>
+</header>
+<section class="hero">
+<figure>
+<img class="hero-clean" src="Estrada%20da%20Luz.png" alt="Estrada da Luz: lote vedado com vegetação alta entre blocos habitacionais">
+<figcaption style="font-size:12px;color:var(--mut);padding-top:8px">Estrada da Luz, 08/2024, vista SE — moldura Google cortada no hero; original integral na Fig. 4. Fonte: Google Street View (uso académico).</figcaption>
+</figure>
+<div class="hero-cap">
+<div>
+<h1>Grande Lisboa / Lisboa / Estrada da Luz</h1>
+<p>38º45'03.2" N, 9º10'27.9" W (~38.7509, -9.1744) · 87 m · NUTS 2024 · Site-entrega P1–P5</p>
+</div>
+<p>Território e lugar · Clima · Cultura · Síntese</p>
+</div>
+</section>
+<main>
+
+<!-- ================= PRANCHA 1 ================= -->
+<section class="prancha" id="p1">
+<div class="p-open"><span class="n">01</span><div class="tt"><b>Prancha 1 — Território e lugar</b><span>NUTS · plantas · figura-fundo · quadro INE/Pordata · 9 dimensões</span></div></div>
+
+<h3>1.1 Onde fica o sítio no mapa oficial (divisões NUTS 2024)</h3>
+<p class="src">NUTS = as divisões territoriais oficiais da União Europeia para estatísticas. São 3 níveis, do maior para o menor.</p>
+<ul>
+<li><b>NUTS I: Continente</b> — Portugal divide-se em 3 grandes regiões: Continente, Açores e Madeira. O sítio fica no Continente. Fonte: INE “A implementação das NUTS 2024” / Regulamento Delegado (UE) 2023/674.</li>
+<li><b>NUTS II: Grande Lisboa</b> — desde 2024, a Grande Lisboa é uma região deste nível: junta só os municípios a norte do Tejo da antiga Área Metropolitana de Lisboa (AML).</li>
+<li><b>NUTS III: Grande Lisboa</b> — é também uma sub-região com 9 municípios, 81 freguesias e capital em Lisboa: <b>Amadora, Cascais, Lisboa, Loures, Mafra, Odivelas, Oeiras, Sintra, Vila Franca de Xira</b>. Fonte: INE NUTS 2024; Pordata.</li>
+<li>O que mudou de 2013 para 2024: a antiga AML deixou de contar como região e dividiu-se em Grande Lisboa (a norte do Tejo) e Península de Setúbal (a sul); nasceu ainda a NUTS II Oeste e Vale do Tejo.</li>
+<li><b>Área (tamanho):</b> Grande Lisboa <b>1 389,97 km²</b> (cerca de 1 390) · Lisboa <b>100,05 km²</b> (cerca de 100). Fonte: INE Superfície NUTS-2024; Pordata.</li>
+<li><b>População:</b> em 2021 (Censos) 2 062 306 / 545 796 · em 2025 (estimativa) 2 415 261 / 658 236 (INE rev. 22/06/2026; Pordata). Ou seja, entre 2021 e 2025 Lisboa ganhou 52 789 pessoas (+8,7%): nasceram menos 4 340 do que morreram, mas chegaram 57 129 migrantes.</li>
+<li><b>Densidade (pessoas por km²):</b> Lisboa 6 579 (2025, a 4.ª mais densa do país) · Grande Lisboa 1 552 (2024).</li>
+<li><b>Papel da região:</b> Lisboa é a capital — concentra governo, empresas, universidades, hospitais, cultura e grandes transportes (aeroporto, porto). Produz <b>90 686 M€ em 2024, ou seja 31,3% de toda a economia do país, 42 345 € por habitante (1.º lugar)</b> — INE Contas Regionais.</li>
+<li><b>Ponto estudado:</b> 38.75089, −9.17442 — zona da Estrada da Luz, entre Carnide e São Domingos de Benfica. Atenção: “Estranha da Luz” não existe nos mapas — o nome certo é <b>Estrada da Luz</b>. A altitude de 87 m é plausível (a zona anda entre 80 e 110 m) mas tem de ser confirmada com levantamento topográfico (MDT-DGT).</li>
+</ul>
+
+<h3>1.2 O sítio visto de cima e da rua (anexos)</h3>
+<div class="grid3">
+<figure id="fig1"><img src="1km.png" alt="Planta 1 km do sítio Estrada da Luz: Benfica, Estádio e vias"><figcaption><b>Fig. 1</b> — 1 km — Benfica / Campo Grande / Estádio. 21/09/2026. Fonte: Google Maps (uso académico). <span class="norte">N ↑</span> Escala aprox. pelo selo do mapa — confirmar em planta PT-TM06.</figcaption></figure>
+<figure id="fig2"><img src="200m.png" alt="Planta 200 m: Bairro Dona Leonor a norte, São João a este, Estádio a oeste"><figcaption><b>Fig. 2</b> — 200 m — B. Dona Leonor (N), B. São João (E), Estádio (W), Av. Lusíada (S). Fonte: Google Maps. <span class="norte">N ↑</span></figcaption></figure>
+<figure id="fig3"><img src="100m.png" alt="Planta 100 m do vazio entre Estrada da Luz e Avenida Lusíada"><figcaption><b>Fig. 3</b> — 100 m — vazio expectante entre Estrada da Luz e Av. Lusíada; pin no centro-S. Fonte: Google Maps. <span class="norte">N ↑</span></figcaption></figure>
+</div>
+<div class="grid2">
+<figure id="fig4"><img src="Estrada%20da%20Luz.png" alt="Fotografia Estrada da Luz para sudeste: lote vedado com palha seca"><figcaption><b>Fig. 4</b> — Estrada da Luz, 08/2024, vista SE: lote vedado, palha seca, pampas, blocos 5–8 pisos, Lidl/Pingo Doce. Fonte: Google Street View (uso académico).</figcaption></figure>
+<figure id="fig5"><img src="R.%20Hernani%20Lopes.png" alt="Fotografia Rua Ernâni Lopes para norte: encosta verde-amarela florida"><figcaption><b>Fig. 5</b> — R. Ernâni Lopes, 03/2026, vista N: encosta verde-amarela florida (Oxalis), jovens com tutores, estacionamento + B. S. João. Fonte: Google Street View.</figcaption></figure>
+</div>
+
+<h3>1.3 Quem vive aqui — 8 números (Censos 2021 + INE 2025)</h3>
+<p class="src">A tabela mostra 8 indicadores, sempre com valor, ano e fonte (colunas: Indicador | Lisboa | NUTS III | Ano | Fonte). Só usámos o INE e a Pordata. “Não confirmado” = ainda não encontrámos o dado oficial. Detalhe em <i>P1-TAB_quadro_socioeconomico.md</i>. Em ecrã pequeno, deslizar a tabela — o cabeçalho e a coluna Ano ficam fixos.</p>
+<div class="table-scroll"><table>
+<tr><th>Indicador</th><th>Lisboa</th><th>NUTS III</th><th>Ano</th><th>Fonte/tabela</th></tr>
+<tr><td>População residente</td><td>545 796 (2021) ; 658 236 (2025)</td><td>2 062 306 (2021) ; 2 415 261 (2025)</td><td>2021 + 2025</td><td>INE Censos [2021] + Pop. NUTS-2024; Pordata (rev. 22/06/2026)</td></tr>
+<tr><td>Variação 2011–2021 (%)</td><td>−1,4 (2021; final −1,25)</td><td>não confirmado — NUTS-2024; ref. AML +1,7</td><td>2021</td><td>INE Censos Prov./Def.</td></tr>
+<tr><td>Índice de envelhecimento</td><td>177/100 (2021) ; 174/100 (2025)</td><td>não confirmado — ref. AML 151</td><td>2021 + 2025</td><td>Pordata (INE); INE Fig.8</td></tr>
+<tr><td>Densidade (hab/km²)</td><td>5 455 (2021 calc.) ; 6 579 (2025)</td><td>1 484 (2021 calc.) ; 1 738 (2025)</td><td>2021 + 2025</td><td>INE Pop.+Superfície (cálculo); Pordata</td></tr>
+<tr><td>Alojamentos (n.º)</td><td>não confirmado (2021) ; 320 176 (2022)</td><td>não confirmado (2021/2025)</td><td>2021 n/c + 2022</td><td>Pordata (INE Obras); INE Censos</td></tr>
+<tr><td>Escolaridade superior (%)</td><td>36,8 (2021)</td><td>não confirmado</td><td>2021</td><td>INE Censos; Pordata (DGEEC)</td></tr>
+<tr><td>Taxa de desemprego (%)</td><td>não confirmado (2021/2025)</td><td>não confirmado (2021) ; 6,3 (2025; 5,8 4.ºT)</td><td>2021 n/c + 2025</td><td>INE Emprego 4.ºT 2025; Pordata (IEFP)</td></tr>
+<tr><td>Poder de compra (índice)</td><td>186,3 (2021)</td><td>não confirmado — ref. AML 121,4</td><td>2021</td><td>INE EPCC 2021</td></tr>
+</table></div>
+<div class="kv"><b>O que estes números dizem (5 ideias):</b> 1) a capital concentra 31,3% da economia do país e isso pressiona a Luz (casas, lojas, trânsito); 2) Lisboa perdeu gente entre 2011–21 (−1,4%) mas voltou a crescer entre 2021–25 (+8,7%) só graças à imigração; 3) é uma zona muito densa (6 579 pessoas/km²) e envelhecida (177 idosos por cada 100 jovens) — o projeto tem de servir todas as idades e não ter barreiras; 4) é uma zona qualificada (36,8% com curso superior) e rica (poder de compra 186,3), mas as casas estão caríssimas (avaliação 3 826 €/m²; novas a 5 035 €/m² em 2024); 5) as regiões mudaram em 2024, por isso nunca misturar os números antigos da AML com os da nova Grande Lisboa.</div>
+<p class="conceito">A Luz como rótula densa, qualificada e envelhecida da capital-metrópole: projetar proximidade intergeracional e habitação acessível que segure a migração sem expulsar quem cá vive.</p>
+
+<h3>1.4 O lugar em 9 temas (resumo + ideia-guia)</h3>
+<table>
+<tr><th>Tema</th><th>Como está hoje</th><th>Fonte</th><th>O que isso obriga a fazer</th></tr>
+<tr><td>1 Cores</td><td>Amarelo-palha dos prados secos, verde com amarelo em março, cinzento do asfalto, branco/bege/ocre das casas e laranja das telhas</td><td>Fotos 2024/26</td><td>Usar estes tons mediterrânicos como base; medir as cores exatas no local</td></tr>
+<tr><td>2 Solos</td><td>Terreno vazio com ervas e terra à vista; por baixo há rocha vulcânica (basalto) e calcário, muito mexido por aterros; ainda sem sondagem</td><td>LNEG 34-D; DGADR; CML</td><td>Furar e analisar o solo antes de projetar fundações; deixar a chuva infiltrar-se no terreno</td></tr>
+<tr><td>3 Plantas e bichos</td><td>Ervas secas, arbustos, provável erva-das-pampas (planta invasora, por confirmar) e árvores novas com tutores; nenhum animal fotografado</td><td>Fotos; ICNF</td><td>Manter as árvores, arrancar a invasora, semear prado que vive sem rega em vez de relva; fazer inventário na primavera</td></tr>
+<tr><td>4 Sismos</td><td>Lisboa toda tem risco sísmico alto; nesta zona espera-se intensidade VIII (como no terramoto de 1755)</td><td>CML; PDM; EC8</td><td>Projetar pelas regras anti-sísmicas europeias e confirmar o tipo de solo no ponto exato</td></tr>
+<tr><td>5 Cheias</td><td>A 87 m de altitude, longe do rio e das zonas de cheia do Tejo; risco moderado de poças e enxurradas a descer para a Av. Lusíada</td><td>CML; APA; PDM</td><td>Portas acima do nível da rua e pavimentos que deixam passar a água</td></tr>
+<tr><td>6 Fogo</td><td>Na cidade o risco de fogo florestal é muito baixo; no lote há mato seco que pode arder em dias de calor; na Grande Lisboa houve 1 150 incêndios em edifícios em 2025</td><td>CML; ICNF; ANEPC</td><td>Limpar faixa de mato, plantar espécies pouco inflamáveis, garantir entrada de bombeiros e bocas de incêndio</td></tr>
+<tr><td>7 Ar e barulho</td><td>O ar sofre com o trânsito (Av. Lusíada, Eixo Norte-Sul, 2.ª Circular); o barulho deve passar os 65 decibéis, mas nunca foi medido no ponto</td><td>CML mapa de ruído; APA</td><td>Consultar o mapa de ruído da Câmara no ponto exato; quartos virados para dentro, janelas anti-ruído</td></tr>
+<tr><td>8 Serviços</td><td>Zona bem servida a 5–10 min a pé: 2 hospitais, Loja do Cidadão, supermercados, escola, Estádio e Metro</td><td>Mapas 100m/200m/1km</td><td>Propor o que falta (não repetir o que já existe); lojas abertas para a Estrada da Luz</td></tr>
+<tr><td>9 Edifícios</td><td>Terreno vazio e vedado a descer de norte para sul; à volta, blocos de 5–9 pisos e o hospital; a Av. Lusíada funciona como barreira a sul</td><td>Fotos; plano Eixo Luz-Benfica</td><td>Criar passagem suave norte–sul, com altura igual à dos vizinhos</td></tr>
+</table>
+<div class="kv"><b>Ideia-guia (figura-fundo):</b> Vazio expectante entre eixos que cospe carros e chama pessoas: a norte a rua-bairro, a sul a auto-estrada-cidade, a leste o bairro denso e a oeste o parque — um anfiteatro seco de palha e flor amarela à espera de sombra, água e atravessamento.<br>Por outras palavras: o lote não é jardim nem quarteirão — é uma soleira entre dois mundos. Se o fecharmos em condomínio ou o cobrirmos todo de betão, perdemos o único respiro deste troço da Lusíada.<br><b>3 pistas para testar:</b> 1) atravessar sem rasgar (caminho norte–sul a meia-encosta, com sombra e água); 2) plantar o seco (prado e árvores que vivem sem rega; arrancar as pampas); 3) construir só nas bordas e libertar o centro como jardim comum.</div>
+</section>
+
+<!-- ================= PRANCHA 2 ================= -->
+<section class="prancha" id="p2">
+<div class="p-open"><span class="n">02</span><div class="tt"><b>Prancha 2 — Clima</b><span>O tempo da Luz e 2 regras para o edifício</span></div></div>
+<p class="src">De onde vêm os números: ficheiro climático da estação Lisboa-Geof (38.7192,−9.1497; 8 760 medições, uma por cada hora do ano) · estação do IPMA na Tapada da Ajuda (médias oficiais de 1991–2020) · mapa Köppen = <b>Csa, ou seja clima temperado de verão quente e seco</b> (correção: o enunciado dizia Csb, verão ameno, mas agosto tem média das máximas de 29,0 °C — logo é Csa).</p>
+<div class="grid2">
+<div class="kv"><b>Ano-tipo hora a hora (EPW):</b> janeiro anda nos 12 °C e agosto nos 23 °C; picos de 34–35 °C; 77 horas por ano acima de 30 °C (44 só em agosto); só 27 horas abaixo de 7 °C. O vento de verão vem de norte/noroeste 8 vezes em cada 10 — a <b>Nortada</b>, o “ar condicionado” natural do sítio. A chuva deste ano-tipo (~364 mm) <b>não serve como média</b> — ver ao lado.</div>
+<div class="kv"><b>Médias oficiais de 30 anos (IPMA):</b> agosto é o mês mais quente (média 23,2 °C, máximas 29,0 °C); 112 dias por ano acima de 25 °C e recorde de 44,0 °C (04/08/2018); chove 667,8 mm por ano, quase tudo entre outubro e janeiro (novembro: 107,3 mm; julho: 2,4 mm); chove em cerca de 75 dias.</div>
+</div>
+<figure id="fig6"><img src="K%C3%B6ppen%20Climate.png" alt="Köppen Climate Explorer mostrando Csa em Lisboa"><figcaption><b>Fig. 6</b> — Köppen Climate Explorer — fundo amarelo Csa, Temperate estável 1901–30→1991–2020.</figcaption></figure>
+<ol>
+<li><b>O pior calor vai de meados de julho ao fim de agosto</b> (médias 23–24,5 °C, picos 34–35 °C): valem paredes grossas e arejar a casa de noite, quando está 17–18 °C.</li>
+<li><b>A Nortada é gratuita:</b> o vento vem de norte/noroeste 81,5% do verão — abrir a casa a norte e fechar/sombrear a sul e poente.</li>
+<li><b>74% da chuva cai em 4 meses</b> (out–jan) e no verão quase nada: telhados e jardins devem guardar a água de outono (cisterna) e travar as enxurradas curtas e fortes.</li>
+<li><b>Frio quase inexistente</b> (geada: 0,1 dias por ano): a diferença de 10–12 °C entre dia e noite chega para arrefecer a casa sem ar condicionado.</li>
+<li><b>Sombra de maio a setembro</b> (112 dias quentes): palas, estores e árvores de folha caduca a sul/poente; no inverno, com o sol baixo, deixar o sol entrar.</li>
+<li><b>As fotos confirmam:</b> agosto seco e amarelo (plantas com sede) contra março verde e florido; o terreno desce para sul.</li>
+</ol>
+<p><b>Onde os dois ficheiros concordam:</b> verão quente e seco, inverno ameno, frio raro e vento norte. <b>Onde discordam:</b> a chuva do ano-tipo não é a média (para água, vale o IPMA); o pico de uma hora não é a média das máximas (são coisas diferentes); a diferença de altitude entre estações (9–17 m) é irrelevante.</p>
+<div class="regra"><b>R1 — Edifício atravessado pela Nortada, fechado a poente:</b> casas com ar a passar de norte para sul em todos os pisos, varandas abertas a norte e fachada poente quase cega (&lt;30% janelas) com sombra móvel de maio a setembro; base a sul meio enterrada, que se mantém fresca. Verifica-se: ≥80% das casas ventiladas de lado a lado + zero vidro a poente sem sombra.</div>
+<div class="regra"><b>R2 — Sombra no verão, sol no inverno, água no outono:</b> nenhuma janela a sul/nascente/poente sem sombra calculada para 21 jun–21 set e sol livre de 21 nov–21 fev; telhado 100% útil (sombra + painéis + retenção de ≥30 mm da primeira chuvada) ligado a cisterna para rega e autoclismos; jardim 0% relva, 100% prado e árvores que vivem sem rega. Verifica-se: estudo de sombras + contas da água out–jan → jun–ago.</div>
+</section>
+
+<!-- ================= PRANCHA 3 ================= -->
+<section class="prancha" id="p3">
+<div class="p-open"><span class="n">03</span><div class="tt"><b>Prancha 3 — Cultura</b><span>3 lições das casas antigas · 2 obras vizinhas · 1 tendência</span></div></div>
+<div class="ficha">
+<h4>R-V1 — Massa + cal (inércia e reflexão)</h4>
+<dl>
+<dt>Morada / distância</dt><dd>Núcleo Carnide/Luz (Largo Chafariz–Igreja, ~700 m NW do sítio) + Alfama/Mouraria (tipo)</dd>
+<dt>Autoria / tipo</dt><dd>Construção vernacular anónima (tipo Inquérito 1955–60)</dd>
+<dt>Ano / período</dt><dd>Pré-1960 / vernacular — data ao edifício: não confirmado</dd>
+<dt>Fonte</dt><dd><i>Arquitectura Popular em Portugal</i> (OA 2004, OASRS 24957); CML/CEG <i>Orientações Climáticas</i> (2005); SIPA</dd>
+</dl>
+<p>Paredes grossas que guardam o fresco do dia para a noite + cal branca que reflete o sol + janelas pequenas com portadas de madeira. Lição para o projeto: peso e cores claras.</p>
+<div class="grid2">
+<figure id="fig7"><img src="P4_fotos_exemplos/R-V1_Alfama_casa-caiada.jpg" alt="Alfama — casa caiada, vão pequeno"><figcaption><b>Fig. 7</b> — R-V1 Alfama: alvenaria caiada e vãos pequenos (foto livre, ver INDICE_FOTOS).</figcaption></figure>
+<figure id="fig8"><img src="P4_fotos_exemplos/R-V1_Carnide_Igreja-da-Luz.jpg" alt="Igreja de Nossa Senhora da Luz, Carnide"><figcaption><b>Fig. 8</b> — R-V1 Carnide/Luz: Igreja de Nossa Senhora da Luz, núcleo histórico (~700 m NW do sítio). Fonte: Wikimedia Commons (INDICE_FOTOS).</figcaption></figure>
+</div>
+</div>
+<div class="ficha">
+<h4>R-V2 — Sombra intermédia (beirado / varanda / toldo + caduca S/W)</h4>
+<dl>
+<dt>Morada / distância</dt><dd>Baixa Pombalina / Bairro Alto + quintais Carnide–Benfica (CONFORM Piçarras 1756–63)</dd>
+<dt>Autoria / tipo</dt><dd>Vernacular + pombalino (gaiola, saguões, portadas/estores)</dd>
+<dt>Ano / período</dt><dd>Pombalino pós-1755; quintais séc. XVIII — detalhe varanda: foto própria</dd>
+<dt>Fonte</dt><dd>OA Inquérito; CML Orientações; CONFORM; Cadernos Arquivo Municipal</dd>
+</dl>
+<p>Do fim da primavera ao início do outono, nenhuma janela a sul ou poente sem sombra que se possa abrir e fechar (estore, toldo ou portada); a varanda de ferro com toldo é a versão urbana da latada do campo. Lição: janelas pequenas a poente e galerias frescas a norte.</p>
+<div class="grid2">
+<figure id="fig9"><img src="P4_fotos_exemplos/R-V2_Carnide_Largo-da-Luz.jpg" alt="Largo da Luz, Carnide"><figcaption><b>Fig. 9</b> — R-V2 Largo da Luz: largo arborizado e muros do núcleo histórico (sombra e estadia).</figcaption></figure>
+<figure id="fig10"><img src="P4_fotos_exemplos/R-V2_Baixa-Praca-do-Comercio.jpg" alt="Baixa Pombalina, Praça do Comércio"><figcaption><b>Fig. 10</b> — R-V2 Baixa Pombalina: conjunto pombalino (gaiola, saguões, portadas/estores — detalhe varanda em foto própria). Fonte: Wikimedia Commons.</figcaption></figure>
+</div>
+</div>
+<div class="ficha">
+<h4>R-V3 — Ar e água (cruzada + pátio/quintal + telha/cisterna)</h4>
+<dl>
+<dt>Morada / distância</dt><dd>Pátios Alfama/Graça (tipo tardoz+saguões) + quintas Carnide/Lumiar; foto tipo: Quinta do Monteiro-Mor, Lumiar (freguesia adjacente)</dd>
+<dt>Autoria / tipo</dt><dd>Vernacular (pátio como poço fresco; TN Ago 17,5 °C, IPMA)</dd>
+<dt>Ano / período</dt><dd>Vernacular — pátio na Luz ao edifício: não confirmado (foto própria)</dd>
+<dt>Foto + crédito</dt><dd>Quinta do Monteiro-Mor (Commons, INDICE_FOTOS); pátio na Luz: foto própria a tirar</dd>
+<dt>Fonte</dt><dd>IPMA 1991–2020 + EPW; CML ventilação; SIPA (Vila Berta, pátio na Graça, SIPA 5964 — foto não usada)</dd>
+</dl>
+<p>Casas atravessadas de norte a sul para a Nortada passar; o pátio ou quintal com árvores funciona como reserva de ar fresco da noite; a cisterna guarda a chuva de outono para o verão seco; nada de relva, que bebe demasiada água.</p>
+</div>
+<div class="ficha">
+<h4>O-C1 — Hospital da Luz Lisboa</h4>
+<dl>
+<dt>Morada / distância</dt><dd>Av. Lusíada, 100 — imediatamente a S do sítio, mesmo eixo</dd>
+<dt>Autoria</dt><dd>Atelier RISCO (Trienal/ArchDaily); Salgado + Pinearq a confirmar</dd>
+<dt>Ano</dt><dd>2007 (Valmor 2007) + ampliação 2019 (RISCO)</dd>
+<dt>Foto + crédito</dt><dd>Complexo Integrado de Saúde da Luz (Commons, INDICE_FOTOS); fachada Av. Lusíada: foto própria com data/GPS</dd>
+<dt>Fonte</dt><dd>Trienal OHL; Luz Saúde; ArchDaily 985456</dd>
+</dl>
+<p>Hospital privado compacto com 193 quartos + 118 apartamentos para seniores, atravessado por uma rua interna e com jardins interiores desenhados à volta da luz natural.</p>
+<figure id="fig12"><img src="P4_fotos_exemplos/O-C1_Hospital-da-Luz_RISCO.jpg" alt="Hospital da Luz, Complexo Integrado de Saúde"><figcaption><b>Fig. 12</b> — O-C1 Hospital da Luz: Complexo Integrado de Saúde da Luz. Fonte: Wikimedia Commons (INDICE_FOTOS).</figcaption></figure>
+</div>
+<div class="ficha">
+<h4>O-C2 — Estádio do SL Benfica / Estádio da Luz</h4>
+<dl>
+<dt>Morada / distância</dt><dd>Av. Eusébio da Silva Ferreira — ~0,5–1,0 km W do sítio (medir em planta)</dd>
+<dt>Autoria</dt><dd>HOK Sport (hoje Populous), Damon Lavelle — a confirmar em fonte primária</dd>
+<dt>Ano</dt><dd>25-10-2003 (clube; Populous indica 2004 — adotar 2003)</dd>
+<dt>Foto + crédito</dt><dd>Exterior diurno (Commons, INDICE_FOTOS)</dd>
+<dt>Fonte</dt><dd>slbenfica.pt; StadiumDB; Wikipédia (secundária)</dd>
+</dl>
+<p>Estádio do Benfica com cobertura translúcida (deixa passar a luz) assente em 4 arcos de aço de 43 m de altura; serve de contraponto de escala ao bairro. Lição para o programa: não copiar o estádio — inspirar-se na forma como usa a luz.</p>
+<figure id="fig13"><img src="P4_fotos_exemplos/O-C2_Estadio-da-Luz_exterior.jpg" alt="Estádio da Luz, exterior"><figcaption><b>Fig. 13</b> — O-C2 Estádio da Luz: exterior diurno. Fonte: Wikimedia Commons (INDICE_FOTOS).</figcaption></figure>
+</div>
+<div class="ficha">
+<h4>T1 — Arte urbana curada GAU-CML (tendência)</h4>
+<dl>
+<dt>Morada / distância</dt><dd>Empenas B. S. João, muros do vazio e passagem Lusíada (suportes); referência: Street Art Park, Lumiar</dd>
+<dt>Autoria / tipo</dt><dd>GAU-CML (DPC, desde 2008/09) + artistas; mural tipo: 120FAITH (florista)</dd>
+<dt>Ano</dt><dd>2009– (estratégia GAU); mural: ver página do ficheiro</dd>
+<dt>Foto + crédito</dt><dd>Mural do florista (Commons, INDICE_FOTOS); empena/muro da Luz: foto própria com autorização e data</dd>
+<dt>Fonte</dt><dd>CML GAU; AgendaLX; Património Cultural; Público 03-06-2022</dd>
+</dl>
+<p>Desde 2008/09 a Câmara autoriza e organiza pintura mural (roteiros, parceria com o Google Art Project, festival MURO e parque no Lumiar), com manutenção assumida. Lição: usar as empenas e muros cegos da Luz com acompanhamento da GAU.</p>
+<div class="kv"><b>T1 — foto livre + foto própria:</b> abaixo mural livre em Lisboa como tipo GAU; no local, fotografar empena/muro da Luz com autorização e data.</div>
+<figure id="fig14"><img src="P4_fotos_exemplos/T1_Arte-urbana-florista-Lisboa.jpg" alt="Arte urbana em Lisboa, mural do florista"><figcaption><b>Fig. 14</b> — T1 Arte urbana em Lisboa: mural do florista, 120FAITH. Fonte: Wikimedia Commons, tipo GAU (INDICE_FOTOS).</figcaption></figure>
+</div>
+<p class="src">Créditos: Trienal OHL, Luz Saúde, ArchDaily 985456, SLB, RTP Arquivos (Colombo 09/1997), CML GAU/AgendaLX, Património Cultural, Público, SIPA/DGPC, CONFORM, Cadernos Arquivo Municipal. Distâncias e autorias finas: não confirmado — medir/confirmar (P6/visita).</p>
+</section>
+
+<!-- ================= PRANCHA 4 ================= -->
+<section class="prancha" id="p4">
+<div class="p-open"><span class="n">04</span><div class="tt"><b>Prancha 4 — Síntese</b><span>SWOT · 2 volumetrias · programa · declaração e validação</span></div></div>
+<div class="swot-grid">
+<div class="swot s"><h4>FORÇAS (INTERNO +)</h4><b>S1. Vazio-costura servida.</b> Pendente N→S entre Estrada da Luz e Lusíada, hospitais/comércio/escola/Metro/Parque Bensaúde 200 m–1 km. Frente ativa + atravessamento.<br><br><b>S2. Procura solvente e qualificada.</b> Superior 36,8% (2021), IpC 186,3 (2021, 1.º), TCO 1 985,6 € (2023). Misto + materiais claros/inércia.</div>
+<div class="swot w"><h4>FRAQUEZAS (INTERNO −)</h4><b>W1. Densidade + envelhecimento.</b> 6 579 hab/km² (2025), 177/100 (2021), lote em pendente sem acesso/sombra. Rampas, intergeracional, custo+.<br><br><b>W2. Vulnerabilidade sem ensaio.</b> Sismo VIII, ruído &gt;65 Lden, basalto/aterro sem sondagem. Hipótese até EC8+isófonas+sondagem.</div>
+<div class="swot o"><h4>OPORTUNIDADES (EXTERNO +)</h4><b>O1. Janela demográfica.</b> −1,4% (11–21) mas +8,7% (+52 789) 21–25 por migração +57 129 vs natural −4 340. Habitação acessível intergeracional.<br><br><b>O2. Clima + verde + arte.</b> Nortada 81,5% + amplitude 10–12 °C (sem AC); bacia Out–Jan + sequeiro; arte GAU + Hospital 2007 como luz/jardins.</div>
+<div class="swot t"><h4>AMEAÇAS (EXTERNO −)</h4><b>T1. Calor/secura/chuvada.</b> 112 dias ≥25, 36,8 ≥30, 44,0 °C ext.; 667,8 mm Out–Jan 74% vs &lt;5 Jul–Ago; S29–35 23–24,5 med. Ilha calor + fogo pasto + escorrência.<br><br><b>T2. Pressão + incerteza NUTS-2024.</b> IpC/ganho altos com desigualdade; séries GL novas sem consolidar; sem PDM/cadastro há risco de fechar o vazio.</div>
+</div>
+<p class="src">S2, W1, O1, T2 com valores INE/Pordata + ano (requisito P5). Ver também a prancha autónoma <a href="P5_prancha_SWOT_16x9.svg">P5_prancha_SWOT_16x9.svg</a> (16:9).</p>
+<figure id="fig16b"><img src="P5_prancha_SWOT_16x9.svg" alt="Prancha SWOT 16:9: Forças, Fraquezas, Oportunidades, Ameaças"><figcaption><b>Fig. 16b</b> — Prancha SWOT 16:9 embutida (ficheiro <i>P5_prancha_SWOT_16x9.svg</i>).</figcaption></figure>
+<h3>Duas formas para o edifício (1 vantagem + 1 problema cada, com esquema)</h3>
+<div class="vol-grid">
+<div class="vol" id="fig15"><b>A — Barra N–S porosa bordas E/N + clareira (Fig. 15)</b>
+<svg viewBox="0 0 300 180" width="100%" role="img" aria-label="Esquema opção A: barra norte-sul com clareira central"><rect x="4" y="4" width="292" height="172" fill="#FDFAF3" stroke="#C9A227"/><rect x="30" y="30" width="52" height="120" fill="#14365D"/><rect x="218" y="30" width="52" height="120" fill="#14365D"/><ellipse cx="150" cy="95" rx="55" ry="45" fill="#DDE8CF" stroke="#2e7d32" stroke-dasharray="5 4"/><text x="150" y="100" text-anchor="middle" font-size="13" fill="#1c1a16">clareira</text><text x="56" y="100" text-anchor="middle" font-size="11" fill="#fff">N–S</text><text x="244" y="100" text-anchor="middle" font-size="11" fill="#fff">N–S</text><text x="150" y="22" text-anchor="middle" font-size="12" fill="#14365D">N ↑ Nortada ↓</text><text x="150" y="166" text-anchor="middle" font-size="12" fill="#b3541e">S · Lusíada (zócalo fresco)</text></svg>
+<p>Vantagem: aproveita toda a Nortada, iguala a altura dos vizinhos e deixa o centro verde e silencioso.<br>Problema: a entrada a norte é estreita (bombeiros e lojas difíceis) e exige juntas anti-sísmicas e poucas janelas a poente.</p></div>
+<div class="vol" id="fig16"><b>B — Pente E–W + pátio S + zócalo fresco Lusíada (Fig. 16)</b>
+<svg viewBox="0 0 300 180" width="100%" role="img" aria-label="Esquema opção B: pente com pátio a sul"><rect x="4" y="4" width="292" height="172" fill="#FDFAF3" stroke="#C9A227"/><rect x="30" y="30" width="240" height="34" fill="#14365D"/><rect x="30" y="76" width="240" height="34" fill="#14365D"/><rect x="30" y="122" width="240" height="28" fill="#8a8a8a"/><ellipse cx="150" cy="93" rx="46" ry="30" fill="#FFF3D6" stroke="#b3541e" stroke-dasharray="5 4"/><text x="150" y="97" text-anchor="middle" font-size="13" fill="#1c1a16">pátio S</text><text x="150" y="22" text-anchor="middle" font-size="12" fill="#14365D">N ↑ fechar a poente</text><text x="150" y="166" text-anchor="middle" font-size="12" fill="#1c1a16">S · zócalo + cisterna</text></svg>
+<p>Vantagem: a base enterrada mantém o fresco e trava o barulho da Lusíada; o pátio apanha sol de inverno e a cisterna guarda água; nada de relva.<br>Problema: se o pátio abrir mal a sul, bloqueia o vento e amplia o barulho — só funciona com 80% das casas ventiladas de lado a lado.</p></div>
+</div>
+<h3>O que caberia no lote (hipótese — NÃO é um dado; faltam o PDM e o cadastro)</h3>
+<table>
+<tr><th>Função</th><th>m²</th><th>Unidades</th><th>Notas</th></tr>
+<tr><td>Habitação intergeracional T1–T3 N–S</td><td>2 400–3 000</td><td>32–40 (30% T1 55 m², 50% T2 75 m², 20% T3 95 m²)</td><td>Responde à procura (O1) e aos idosos (W1); todas atravessadas pelo vento (regra R1)</td></tr>
+<tr><td>R/C ativo Estr. Luz</td><td>300–450</td><td>4–6 lojas 60–80 m²</td><td>Não repetir o comércio que já existe (ver Serviços, Prancha 1)</td></tr>
+<tr><td>Equipamento (sala + creche/centro dia)</td><td>200–300</td><td>120+100 m², 20–30 ut.</td><td>Apoio ao bairro (crianças de dia, seniores)</td></tr>
+<tr><td>Cowork (piso sossegado)</td><td>150–250</td><td>15–25 postos</td><td>Para a população qualificada (36,8%) e com poder de compra</td></tr>
+<tr><td>Estacionamento (se PDM)</td><td>600–900</td><td>20–30 + 60 bicis</td><td>Só se o plano obrigar; enterrado; redes por confirmar</td></tr>
+<tr><td>Clareira (prado+bosquete+SUDS)</td><td>1 200–1 800 (≥50% perm.)</td><td>sombra ≥40%</td><td>Metade do lote deixa passar água; sem relva; cisterna que segura ≥30 mm da 1.ª chuva; arte nos muros</td></tr>
+<tr><td>Cisterna+técnicas/PV</td><td>80–120</td><td>60–100 m³</td><td>Guarda a água de out–jan para o verão</td></tr>
+<tr><td><b>Total hipotético</b></td><td><b>~3 700–5 100</b></td><td><b>32–40 fogos+lojas+equip.</b></td><td><b>A validar: cadastro, PDM e índice de construção</b></td></tr>
+</table>
+<h3 id="declaracao">Declaração e validação (texto único — igual a DECLARACAO_IA_Grupo07.md)</h3>
+<div class="kv">O grupo 7 declara ter utilizado o Muse Spark 1.3 Free nos prompts P0–P5 (P6 pendente), entre 14 e 21 de setembro de 2026. Anexados: cinco imagens, ficheiro EPW, ficha IPMA e imagem Köppen (extrato PDM e quadros INE/Pordata não arquivados = “não confirmado”). Verificados: sítio do município (parcial), IPMA, fonte da obra (Trienal/SLB; autoria fina a confirmar) e tabelas INE/Pordata (só valores citados em P1). Rejeitadas: Csb, “Estranha da Luz”, chuva TMY como normal e Colombo como referência (ver declaração). Aceleração estimada: 10–14 h (a confirmar pelos signatários, após registo de horas). Os signatários assumem integralmente a autoria.</div>
+<h3>O que já confirmámos (e como)</h3>
+<p class="src">Já confirmámos: o site da Câmara, a ficha do IPMA, que as duas obras existem (onde ficam e quem as fez) e os números da Pordata.</p>
+<div class="grid3">
+<div class="kv"><b>1. Regras da cidade</b><br>Confirmar o artigo do Plano Diretor no site da Câmara. Não usar regras de outros países.</div>
+<div class="kv"><b>2. Clima</b><br>Confirmar vento e sol no IPMA e no Portal do Clima.</div>
+<div class="kv"><b>3. Cultura</b><br>Confirmar que cada obra existe e quem a desenhou (atelier, Câmara ou revista da especialidade).</div>
+</div>
+<div class="kv"><b>4. Números da SWOT</b><br>Cada número da SWOT foi confirmado na fonte: INE ou Pordata (Fundação Francisco Manuel dos Santos) — sempre com valor, ano e tabela. Sem fonte, o ponto sai da SWOT.</div>
+</section>
+
+<!-- ================= ÍNDICE DE FIGURAS (FINAL) ================= -->
+<section class="prancha" id="figuras">
+<div class="p-open light"><div class="tt"><b>Anexo — Índice de figuras</b><span>Fig. 1–16 · clicar salta para a figura</span></div></div>
+<ol>
+<li><a href="#fig1">Fig. 1</a> — Planta 1 km (Benfica / Estádio)</li>
+<li><a href="#fig2">Fig. 2</a> — Planta 200 m (bairros e eixos)</li>
+<li><a href="#fig3">Fig. 3</a> — Planta 100 m (vazio Estrada da Luz / Av. Lusíada)</li>
+<li><a href="#fig4">Fig. 4</a> — Estrada da Luz 08/2024 vista SE (palha seca)</li>
+<li><a href="#fig5">Fig. 5</a> — R. Ernâni Lopes 03/2026 vista N (encosta florida)</li>
+<li><a href="#fig6">Fig. 6</a> — Köppen Climate Explorer (Csa)</li>
+<li><a href="#fig7">Fig. 7</a> — R-V1 Alfama (casa caiada)</li>
+<li><a href="#fig8">Fig. 8</a> — R-V1 Igreja da Luz, Carnide</li>
+<li><a href="#fig9">Fig. 9</a> — R-V2 Largo da Luz</li>
+<li><a href="#fig10">Fig. 10</a> — R-V2 Baixa / Praça do Comércio</li>
+<li>Fig. 11 — R-V3 (foto retirada do site; original arquivado em P4_fotos_exemplos)</li>
+<li><a href="#fig12">Fig. 12</a> — O-C1 Hospital da Luz (RISCO)</li>
+<li><a href="#fig13">Fig. 13</a> — O-C2 Estádio da Luz (exterior)</li>
+<li><a href="#fig14">Fig. 14</a> — T1 mural do florista 120FAITH (tipo GAU)</li>
+<li><a href="#fig15">Fig. 15</a> — Volumetria A (barra N–S + clareira, esquema)</li>
+<li><a href="#fig16">Fig. 16</a> — Volumetria B (pente + pátio S, esquema) · <a href="#fig16b">Fig. 16b</a> — prancha SWOT 16:9 (ficheiro)</li>
+</ol>
+</section>
+</main>
+<footer class="site-foot"><span>© 2026 — GRUPO 07 · GRANDE LISBOA / ESTRADA DA LUZ</span><span>P1–P5 · v2026-09-24</span>
+<span class="print-src" style="display:none"><br>Fontes: INE https://www.ine.pt · Pordata https://www.pordata.pt · CML https://www.lisboa.pt · Trienal OHL https://www.trienaldelisboa.com/ohl/espaco/hospital-da-luz · ArchDaily https://www.archdaily.com/985456/expansion-of-hospital-da-luz-in-lisbon-risco · SL Benfica https://www.slbenfica.pt/pt-pt/instituicao/instalacoes/estadio · GAU/AgendaLX https://www.agendalx.pt · Commons https://commons.wikimedia.org (ver INDICE_FOTOS).</span></footer>
+</body>
+</html>
