@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" viewBox="0 0 1920 1080" font-family="Inter, Helvetica, Arial, sans-serif">
+  <!-- Fundo branco quente -->
+  <rect x="0" y="0" width="1920" height="1080" fill="#FDFAF3"/>
+
+  <!-- Área grelha (reserva faixa inferior 76px) -->
+  <!-- Divisórias douradas finas -->
+  <rect x="955" y="40" width="3" height="960" fill="#C9A227"/>
+  <rect x="40" y="505" width="1840" height="3" fill="#C9A227"/>
+  <!-- Moldura ténue -->
+  <rect x="40" y="40" width="1840" height="964" fill="none" stroke="#C9A227" stroke-width="2"/>
+
+  <!-- FORÇAS sup esq -->
+  <text x="500" y="140" text-anchor="middle" font-size="44" font-weight="700" letter-spacing="6" fill="#14365D">FORÇAS</text>
+  <text x="500" y="300" text-anchor="middle" font-size="28" font-weight="400" fill="#1E1E1E">Vazio-costura: metro, hospital e comércio perto</text>
+  <text x="500" y="400" text-anchor="middle" font-size="28" font-weight="400" fill="#1E1E1E">Procura qualificada (36,8% superior; IpC 186,3 — 2021)</text>
+
+  <!-- FRAQUEZAS sup dir -->
+  <text x="1420" y="140" text-anchor="middle" font-size="44" font-weight="700" letter-spacing="6" fill="#14365D">FRAQUEZAS</text>
+  <text x="1420" y="300" text-anchor="middle" font-size="28" font-weight="400" fill="#1E1E1E">Denso e envelhecido (6579 hab/km² 2025; 177/100 2021)</text>
+  <text x="1420" y="400" text-anchor="middle" font-size="28" font-weight="400" fill="#1E1E1E">Sismo VIII e ruído &gt;65 dB sem sondagem</text>
+
+  <!-- OPORTUNIDADES inf esq -->
+  <text x="500" y="610" text-anchor="middle" font-size="44" font-weight="700" letter-spacing="6" fill="#14365D">OPORTUNIDADES</text>
+  <text x="500" y="770" text-anchor="middle" font-size="28" font-weight="400" fill="#1E1E1E">Migração +8,7% 2021–25: habitação acessível</text>
+  <text x="500" y="870" text-anchor="middle" font-size="28" font-weight="400" fill="#1E1E1E">Nortada 81,5% e chuva Out–Jan: passivo e SUDS</text>
+
+  <!-- AMEAÇAS inf dir -->
+  <text x="1420" y="610" text-anchor="middle" font-size="44" font-weight="700" letter-spacing="6" fill="#14365D">AMEAÇAS</text>
+  <text x="1420" y="770" text-anchor="middle" font-size="28" font-weight="400" fill="#1E1E1E">112 dias TX≥25 e 44,0 °C: calor e chuvada intensa</text>
+  <text x="1420" y="870" text-anchor="middle" font-size="28" font-weight="400" fill="#1E1E1E">Pressão imobiliária sem PDM confirmado</text>
+
+  <!-- Faixa inferior estreita -->
+  <rect x="0" y="1004" width="1920" height="76" fill="#14365D"/>
+  <text x="960" y="1052" text-anchor="middle" font-size="26" font-weight="500" letter-spacing="1" fill="#FFFFFF">38°45′03.2″N 9°10′27.9″W  •  87 m  •  EPW Lisboa-Geof 085350 TMYx  •  Köppen-Geiger Csa</text>
+</svg>
